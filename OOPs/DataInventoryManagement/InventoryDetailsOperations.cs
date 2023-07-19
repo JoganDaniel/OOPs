@@ -17,6 +17,7 @@ namespace OOPs.DataInventoryManagement
             foreach(var data in list)
             {
                 Console.WriteLine(data.Name+" "+data.Weight+" "+data.PricePerKg);
+
             }
         }
     }
