@@ -14,7 +14,7 @@ namespace OOPs
             InventoryManagementOperations manage = new InventoryManagementOperations();
             while (flag)
             {
-                Console.WriteLine("1.Display inventory\n2.Add to inventory\n3.Exit");
+                Console.WriteLine("1.Display inventory\n2.Add to inventory\n3.Delete from inventory\n4.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -28,6 +28,11 @@ namespace OOPs
                         manage.WriteToJsonFile(inventory_filepath);
                         break;
                     case 3:
+                        Console.WriteLine("Enter the item name (Rice,Wheat,Pulse)");
+                        string name1 = Console.ReadLine();
+                        manage.DeleteInventory(name1, inventory_filepath);
+                        break;
+                    case 4:
                         flag = false;
                         break;
                 }

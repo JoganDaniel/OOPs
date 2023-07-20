@@ -55,7 +55,66 @@ namespace OOPs.InventoryManagement
                 };
                 list.PulsesList.Add(details);
             }
-
+        }
+        public void DeleteInventory(string productName,string filepath)
+        {
+            InventoryDetails details = new InventoryDetails();
+            if (productName.ToLower().Equals("rice"))
+            {
+                Console.WriteLine("Enter the name of the rice");
+                string name = Console.ReadLine();
+                foreach(var data in list.RiceList)
+                {
+                    if(data.Name.Equals(name))
+                    {
+                        details = data;
+                    }
+                }
+                if(details!=null)
+                {
+                    list.RiceList.Remove(details);
+                }
+            }
+            if (productName.ToLower().Equals("wheat"))
+            {
+                Console.WriteLine("Enter the name of the wheat");
+                string name = Console.ReadLine();
+                foreach (var data in list.WheatList)
+                {
+                    if (data.Name.Equals(name))
+                    {
+                        details = data;
+                    }
+                }
+                if (details != null)
+                {
+                    list.WheatList.Remove(details);
+                }
+            }
+            if (productName.ToLower().Equals("pulse"))
+            {
+                Console.WriteLine("Enter the name of the pulse");
+                string name = Console.ReadLine();
+                foreach (var data in list.PulsesList)
+                {
+                    if (data.Name.Equals(name))
+                    {
+                        details = data;
+                    }
+                }
+                if (details != null)
+                {
+                    list.PulsesList.Remove(details);
+                }
+            }
+            if (details == null)
+            {
+                Console.WriteLine("No such detail exists");
+            }
+            else
+            {
+                WriteToJsonFile(filepath);
+            }
         }
         public void WriteToJsonFile(string filepath)
         {
