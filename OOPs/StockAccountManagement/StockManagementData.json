@@ -1,0 +1,22 @@
+[
+  {
+    "StockName": "Amazon",
+    "NoOfShares": 100,
+    "SharePrice": 50
+  },
+  {
+    "StockName": "Flipkart",
+    "NoOfShares": 140,
+    "SharePrice": 90
+  },
+  {
+    "StockName": "Myntra",
+    "NoOfShares": 120,
+    "SharePrice": 30
+  },
+  {
+    "StockName": "Ajio",
+    "NoOfShares": 190,
+    "SharePrice": 100
+  }
+]
