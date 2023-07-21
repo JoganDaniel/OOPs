@@ -8,17 +8,24 @@ using System.Threading.Tasks;
 
 namespace OOPs.StockAccountManagement
 {
-    internal class StockOperations
+    public class StockOperations
     {
+        public static List<StockDetails> list;
         public void ReadStockJson(string filepath)
         {
             var json = File.ReadAllText(filepath);
-            List<StockDetails> list = JsonConvert.DeserializeObject<List<StockDetails>>(json);
+            list = JsonConvert.DeserializeObject<List<StockDetails>>(json);
             foreach (var data in list)
             {
                 Console.WriteLine(data.StockName + " " + data.NoOfShares + " " + data.SharePrice);
 
             }
+
         }
-}
+        public void WriteToStockJsonFile(string filepath)
+        {
+            var json = JsonConvert.SerializeObject(list);
+            File.WriteAllText(filepath, json);
+        }
+    }
 }
