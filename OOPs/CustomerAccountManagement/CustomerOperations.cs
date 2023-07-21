@@ -82,35 +82,35 @@ namespace OOPs.CustomerAccountManagement
 
         public void SellStock(string name, int numofShares)
         {
-            CustomerDetails buyCustomerStocks = new CustomerDetails();
+            CustomerDetails sellCustomerStocks = new CustomerDetails();
             foreach (var data in cust_list)
             {
                 if (data.StockSymbol.ToLower().Equals(name.ToLower()))
                 {
                     if (numofShares <= data.NumberOfStock)
                     {
-                        buyCustomerStocks = data;
+                        sellCustomerStocks = data;
                         data.NumberOfStock -= numofShares;
                         break;
                     }
                 }
                 else
                 {
-                    buyCustomerStocks = null;
+                    sellCustomerStocks = null;
                 }
             }
-            if (buyCustomerStocks == null)
+            if (sellCustomerStocks == null)
             {
-                Console.WriteLine("No stocks available");
+                Console.WriteLine("No stocks available or entered shares exceeded your holding");
             }
             else
             {
-                StockDetails buyStock = new StockDetails();
+                StockDetails sellStock = new StockDetails();
                 foreach (var data in StockOperations.list)
                 {
                     if (data.StockName.ToLower().Equals(name.ToLower()))
                     {
-                            buyStock = data;
+                            sellStock = data;
                             data.NoOfShares += numofShares;
                             amount += data.SharePrice * numofShares;
                             break;
