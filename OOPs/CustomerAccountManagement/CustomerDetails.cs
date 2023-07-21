@@ -8,8 +8,8 @@ namespace OOPs.CustomerAccountManagement
 {
     public class CustomerDetails
     {
-        public int Balance { get; set; }
-        public string StockName { get; set; }
+        public int SharePrice { get; set; }
+        public string StockSymbol { get; set; }
         public int NumberOfStock { get; set; }
        
     }

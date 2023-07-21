@@ -11,41 +11,15 @@ namespace OOPs
         static string customer_filePath = @"E:\Bridgelabz\OOPs\OOPs\OOPs\CustomerAccountManagement\CustomerData.json";
         private static void Main(string[] args)
         {
-            //InventoryDetailsOperations details = new InventoryDetailsOperations();
-            //details.ReadInventoryJson(inventory_filepath);
-            //bool flag = true;
-            //InventoryManagementOperations manage = new InventoryManagementOperations();
-            //while (flag)
-            //{
-            //    Console.WriteLine("1.Display inventory\n2.Add to inventory\n3.Delete from inventory\n4.Exit");
-            //    int ch = Convert.ToInt32(Console.ReadLine());
-            //    switch (ch)
-            //    {
-            //        case 1:
-            //            manage.ReadInventoryJson(inventory_filepath);
-            //            break;
-            //        case 2:
-            //            Console.WriteLine("Enter the item name (Rice,Wheat,Pulse)");
-            //            string name = Console.ReadLine();
-            //            manage.AddInventoryManagement(name);
-            //            manage.WriteToJsonFile(inventory_filepath);
-            //            break;
-            //        case 3:
-            //            Console.WriteLine("Enter the item name (Rice,Wheat,Pulse)");
-            //            string name1 = Console.ReadLine();
-            //            manage.DeleteInventory(name1, inventory_filepath);
-            //            break;
-            //        case 4:
-            //            flag = false;
-            //            break;
-            //    }
-            //}
+            
             StockOperations operations = new StockOperations();
-            CustomerOperations customerOperations = new CustomerOperations();
+            Console.WriteLine("Enter your total amount");
+            int amount = Convert.ToInt32(Console.ReadLine());
+            CustomerOperations customerOperations = new CustomerOperations(amount);
             bool flag = true;
             while (flag)
             {
-                Console.WriteLine("1.Display Stocks and Customer Details\n2.Buy Stock\n3.Sell Stock\n4.Exit");
+                Console.WriteLine("1.Display Stocks and Customer Details\n2.Buy Stock\n3.Sell Stock\n4.Display Amount\n5.Exit");
                 int ch = Convert.ToInt32(Console.ReadLine());
                 switch (ch)
                 {
@@ -74,6 +48,9 @@ namespace OOPs
                         operations.WriteToStockJsonFile(stock_filePath);
                         break;
                     case 4:
+                        Console.WriteLine("Amount balance : "+customerOperations.amount);
+                        break;
+                    case 5:
                         flag = false;
                         break;
                 }

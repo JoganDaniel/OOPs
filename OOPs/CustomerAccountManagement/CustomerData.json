@@ -1,1 +1,1 @@
-[{"Balance":10000,"StockName":"amazon","NumberOfStock":0},{"Balance":8200,"StockName":"flipkart","NumberOfStock":30},{"Balance":9500,"StockName":"myntra","NumberOfStock":10},{"Balance":10000,"StockName":"ajio","NumberOfStock":100}]
+[{"SharePrice":30,"StockSymbol":"amazon","NumberOfStock":10},{"SharePrice":90,"StockSymbol":"flipkart","NumberOfStock":20},{"SharePrice":30,"StockSymbol":"myntra","NumberOfStock":10}]

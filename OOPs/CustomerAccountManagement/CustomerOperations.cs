@@ -10,14 +10,19 @@ namespace OOPs.CustomerAccountManagement
 {
     public class CustomerOperations
     {
+        public int amount;
+        public CustomerOperations(int amount) {
+            this.amount = amount;
+        }
         public static List<CustomerDetails> cust_list;
+
         public void ReadCustomerJson(string filepath)
         {
             var json = File.ReadAllText(filepath);
             cust_list = JsonConvert.DeserializeObject<List<CustomerDetails>>(json);
             foreach (var data in cust_list)
             {
-                Console.WriteLine(data.Balance + " " + data.StockName + " " + data.NumberOfStock);
+                Console.WriteLine(data.StockSymbol + " " + data.NumberOfStock + " " + data.SharePrice);
 
             }
         }
@@ -25,40 +30,90 @@ namespace OOPs.CustomerAccountManagement
 
         public void BuyStock(string name,int numofShares)
         {
-            int amount = 0;
-            foreach(var data in StockOperations.list)
-            {
-                if (data.StockName.ToLower().Equals(name.ToLower()))
-                {
-                    foreach (var item in cust_list)
-                    {
-                        if (item.StockName.ToLower().Equals(name.ToLower()))
-                        {
-                            amount = numofShares * data.SharePrice;
-                            data.NoOfShares -= numofShares;
-                            item.Balance -= amount;
-                            item.NumberOfStock += numofShares;
-                        }
-                    }
-                }
-            }
-        }
-        public void SellStock(string name, int numofShares)
-        {
-            int amount = 0;
+            StockDetails buyStock = new StockDetails();
             foreach (var data in StockOperations.list)
             {
                 if (data.StockName.ToLower().Equals(name.ToLower()))
                 {
-                    foreach (var item in cust_list)
+                    if (data.NoOfShares >= numofShares && data.SharePrice * numofShares <= amount)
+                    { 
+                        buyStock = data;
+                        data.NoOfShares -= numofShares;
+                        amount -= data.SharePrice * numofShares;
+                        break;
+                    }
+                    else
                     {
-                        if (item.StockName.ToLower().Equals(name.ToLower()))
-                        {
-                            amount = numofShares * data.SharePrice;
+                        return;
+                    }
+                }
+            }
+            if(buyStock==null)
+            {
+                Console.WriteLine("Stock name doesnt exists");
+
+            }
+            else
+            {
+                CustomerDetails buyCustomerStocks = new CustomerDetails();
+                foreach(var data in cust_list)
+                {
+                    if(data.StockSymbol.ToLower().Equals(name.ToLower()))
+                    {
+                        buyCustomerStocks = data;
+                        data.NumberOfStock +=numofShares;
+                        break;
+                    }
+                    else
+                    {
+                        buyCustomerStocks = null;
+                    }
+                }
+                if (buyCustomerStocks==null)
+                {
+                    buyCustomerStocks = new CustomerDetails();
+                    buyCustomerStocks.StockSymbol= name;
+                    buyCustomerStocks.SharePrice=buyStock.SharePrice;
+                    buyCustomerStocks.NumberOfStock = numofShares;
+                    cust_list.Add(buyCustomerStocks);
+                }
+            }
+        }
+
+        public void SellStock(string name, int numofShares)
+        {
+            CustomerDetails buyCustomerStocks = new CustomerDetails();
+            foreach (var data in cust_list)
+            {
+                if (data.StockSymbol.ToLower().Equals(name.ToLower()))
+                {
+                    if (numofShares <= data.NumberOfStock)
+                    {
+                        buyCustomerStocks = data;
+                        data.NumberOfStock -= numofShares;
+                        break;
+                    }
+                }
+                else
+                {
+                    buyCustomerStocks = null;
+                }
+            }
+            if (buyCustomerStocks == null)
+            {
+                Console.WriteLine("No stocks available");
+            }
+            else
+            {
+                StockDetails buyStock = new StockDetails();
+                foreach (var data in StockOperations.list)
+                {
+                    if (data.StockName.ToLower().Equals(name.ToLower()))
+                    {
+                            buyStock = data;
                             data.NoOfShares += numofShares;
-                            item.Balance += amount;
-                            item.NumberOfStock -= numofShares;
-                        }
+                            amount += data.SharePrice * numofShares;
+                            break;
                     }
                 }
             }
